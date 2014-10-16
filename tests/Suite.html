@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Test Suite Function Tests - Priority 1</title>
+
+<script src="/root/.npm/selenium-webdriver/2.43.5/package/lib/webdriver/webdriver.js"></script>
+<script>
+  var driver = new webdriver.Builder().
+     usingServer('http://localhost:4444/wd/hub').
+     withCapabilities(webdriver.Capabilities.chrome()).
+     build();
+
+ driver.get('http://www.google.com');
+ driver.findElement(webdriver.By.name('q')).sendKeys('webdriver');
+ driver.findElement(webdriver.By.name('btnG')).click();
+ driver.getTitle().then(function(title) {
+   if (title !== 'webdriver - Google Search') {
+     throw new Error(
+         'Expected "webdriver - Google Search", but was "' + title + '"');
+   }
+ });
+
+ driver.quit();
+</script>
+
+</head>
+<body>
+<table>
+  <tr><td><b>Suite Of Tests</b></td></tr>
+  <tr><td><a href="a.html">a</a></td></tr>
+  	
+</table>
+</body>
+</html>

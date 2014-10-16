@@ -1,0 +1,64 @@
+<html>
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<link rel="selenium.base" href="https://www.google.com.pk/" />
+<script type="text/javascript" src="wjs.js">
+
+</script>
+<script src="/root/.npm/selenium-webdriver/2.43.5/package/lib/webdriver/webdriv$
+<script>
+  var driver = new webdriver.Builder().
+     usingServer('http://localhost:4444/wd/hub').
+     withCapabilities(webdriver.Capabilities.chrome()).
+     build();
+
+ driver.get('http://www.google.com');
+ driver.findElement(webdriver.By.name('q')).sendKeys('webdriver');
+ driver.findElement(webdriver.By.name('btnG')).click();
+ driver.getTitle().then(function(title) {
+   if (title !== 'webdriver - Google Search') {
+     throw new Error(
+         'Expected "webdriver - Google Search", but was "' + title + '"');
+   }
+ });
+
+ driver.quit();
+</script>
+
+<title>a</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1"  >
+<thead>
+<tr><td rowspan="1" colspan="3">a</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=gbqfq</td>
+	<td>stackoverflow</td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a/em[text()='Stack Overflow']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/em[text()='Stack Overflow']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>Stack Overflow</td>
+	<td></td>
+</tr>
+</tbody>

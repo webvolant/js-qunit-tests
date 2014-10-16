@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="jtemp" default="build" basedir=".">
+    <property name="source" value="src"/>
+
+    <target name="clean"
+        description="Clean up and create artifact directories">
+        
+        <delete dir="${basedir}/build"/>
+
+        <mkdir dir="${basedir}/build"/>
+    </target>
+
+
+    <target name="jslint" description="Run the JSLint tool on JS files">
+  <fileset dir="public/scripts" id="jsfiles.raw">
+    <include name="**/*.js" />
+    <exclude name="**/*.min.js" />
+  </fileset>
+  <pathconvert pathsep=" " property="jsfiles.clean" refid="jsfiles.raw" />
+  <exec executable="java" output="jslint.xml">
+    <arg line="-jar jslint4java.jar --report xml ${jsfiles.clean}" />
+  </exec>
+</target>	
+	
+
+    <target name="qunit" description="runs QUnit tests using PhantomJS">
+      <!-- QUnit Javascript Unit Tests -->
+      <echo message="Executing QUnit Javascript Unit Tests..."/>
+      <apply executable="phantomjs" >
+	<arg value="${basedir}/tools/qunit-runner.js" />
+        <arg line="--qunit ${basedir}/tools/qunit.js --tests ${basedir}/qunit_tests --junit tools/qunit.xml" />
+	<fileset dir="${basedir}/qunit_tests">
+		<include name="file.js" />
+	</fileset>
+
+      </apply>
+    </target>
+   
+	 <target name="build" depends="clean"/>
+</project>
